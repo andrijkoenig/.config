@@ -1,0 +1,36 @@
+{
+    // Editor Configuration
+    "editor.fontSize": 15,
+    "editor.wordWrap": "on",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "editor.cursorBlinking": "solid",
+    "editor.suggestSelection": "first",
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.suggest.localityBonus": true,
+    "editor.suggest.insertMode": "insert",
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "off",
+        "strings": "off"
+    },
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    // File and Explorer Settings
+    "files.autoSave": "afterDelay",
+    "explorer.confirmDragAndDrop": false,
+    // Workbench and Appearance
+    "workbench.startupEditor": "none",
+    "workbench.editor.revealIfOpen": true,
+    "workbench.settings.editor": "json",
+    "workbench.sideBar.location": "right",
+    // "workbench.statusBar.visible": false,
+    "workbench.colorTheme": "Minimal Kiwi",
+    "workbench.iconTheme": "symbols",
+    "workbench.layoutControl.enabled": false,
+    // Window Settings
+    "window.zoomLevel": 0,
+    "window.title": "",
+    "window.menuBarVisibility": "compact"
+}
