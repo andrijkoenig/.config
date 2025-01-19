@@ -13,7 +13,7 @@ set ignorecase " Case-insensitive searching unless \C or capital in search
 set smartcase " Enable smart case
 set signcolumn=yes " Keep signcolumn on by default
 set updatetime=250 " Decrease update time
-set timeoutlen=300 " Time to wait for a mapped sequence to complete (in milliseconds)
+set timeoutlen=700 " Time to wait for a mapped sequence to complete (in milliseconds)
 set nobackup " Don't create a backup file
 set nowritebackup " Don't write backup before overwriting
 set completeopt=menuone,noselect " Better completion experience
@@ -28,7 +28,7 @@ set shiftwidth=4 " Spaces per indentation
 set tabstop=4 " Spaces per tab
 set softtabstop=4 " Spaces per tab during editing ops
 set expandtab " Convert tabs to spaces
-set nocursorline " Don't highlight the current line
+set cursorline " Do highlight the current line
 set splitbelow " Horizontal splits below current window
 set splitright " Vertical splits to the right
 set noswapfile " Don't use a swap file
@@ -180,14 +180,3 @@ set termguicolors
 " Use a line cursor within insert mode and a block cursor everywhere else.
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
-
-" Netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25 
-" Use 'l' instead of <CR> to open files
-augroup netrw_setup | au!
-    au FileType netrw nmap <buffer> l <CR>
-augroup END
