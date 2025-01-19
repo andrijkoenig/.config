@@ -18,10 +18,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     require("themes.catppuccin"),
 	require("plugins.bufferline"),
-	require("plugins.harpoon"),
 	require("plugins.lualine"),
 	require("plugins.mini-icons"),
-	require("plugins.mini-pairs"),
 	require("plugins.neotree"),
 	require("plugins.telescope"),
 	require("plugins.treesitter"),
