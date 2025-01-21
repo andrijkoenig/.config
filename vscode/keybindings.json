@@ -5,13 +5,34 @@
     "command": "workbench.action.toggleStatusbarVisibility"
   },
   {
-    "key": "ctrl+h",
+    "key": "ctrl+shift+m",
     "command": "workbench.action.toggleActivityBarVisibility"
   },
   // Navigation
   {
+    "key": "ctrl-h",
+    "command": "workbench.action.navigateLeft"
+  },
+  {
+    "key": "ctrl-l",
+    "command": "workbench.action.navigateRight"
+  },
+  {
+    "key": "ctrl-k",
+    "command": "workbench.action.navigateUp"
+  },
+  {
+    "key": "ctrl-j",
+    "command": "workbench.action.navigateDown"
+  },
+  {
     "key": "space ,",
     "command": "workbench.action.showAllEditors",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  {
+    "key": "space p",
+    "command": "workbench.action.showCommands",
     "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
   },
   {

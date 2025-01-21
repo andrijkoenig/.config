@@ -1,73 +1,53 @@
 {
-    // Editor Configuration
-    "editor.fontSize": 13,
-    "editor.wordWrap": "on",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.minimap.enabled": false,
-    "editor.cursorStyle": "line",
-    "editor.suggestSelection": "first",
-    "editor.acceptSuggestionOnCommitCharacter": false,
-    "editor.suggest.localityBonus": true,
-    "editor.suggest.insertMode": "insert",
-    "editor.quickSuggestions": {
-        "other": "on",
-        "comments": "off",
-        "strings": "off"
-    },
-    "editor.scrollbar.horizontal": "hidden",
-    "editor.scrollbar.vertical": "hidden",
-    "editor.lineNumbers": "relative",
-    // File and Explorer Settings
-    "files.autoSave": "afterDelay",
-    "explorer.confirmDragAndDrop": false,
-    // Workbench and Appearance
-    "workbench.startupEditor": "none",
-    "workbench.editor.revealIfOpen": true,
-    "workbench.settings.editor": "json",
-    "workbench.sideBar.location": "right",
-    "workbench.iconTheme": "symbols",
-    "workbench.layoutControl.enabled": false,
-    "workbench.editor.highlightModifiedTabs": true,
-    // Window Settings
-    "window.zoomLevel": 1,
-    "window.title": "",
-    "window.menuBarVisibility": "compact",
-    "git.enableSmartCommit": true,
-    "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', monospace",
-    "editor.cursorBlinking": "smooth",
-    "workbench.editor.pinnedTabsOnSeparateRow": true,
-    "workbench.editor.tabActionCloseVisibility": false,
-    "workbench.editor.tabActionLocation": "left",
-    "workbench.editor.tabSizing": "fixed",
-    "workbench.editor.wrapTabs": true,
-    "csharp.preview.improvedLaunchExperience": true,
-    "csharp.experimental.debug.hotReload": true,
-    // Vim settings
-    "vim.useSystemClipboard": true,
-    "vim.statusBarColorControl": true,
-    "vim.statusBarColors.insert": [
-        "#007acc", // VS Code signature blue for insert mode
-        "#1e1e1e" // Dark gray background
-    ],
-    "vim.statusBarColors.normal": [
-        "#252526", // Slightly lighter gray for normal mode
-        "#d4d4d4" // Soft white text
-    ],
-    "vim.statusBarColors.visual": [
-        "#d7ba7d", // Light purple for visual mode
-        "#1e1e1e" // Dark gray background
-    ],
-    "vim.statusBarColors.replace": [
-        "#d16969", // Soft red for replace mode
-        "#1e1e1e" // Dark gray background
-    ],
-    "workbench.colorCustomizations": {
-        "statusBar.background": "#005f87",
-        "statusBar.noFolderBackground": "#005f87",
-        "statusBar.debuggingBackground": "#005f87",
-        "statusBar.foreground": "#ffffff",
-        "statusBar.debuggingForeground": "#ffffff"
-    },
-    "workbench.activityBar.location": "hidden",
+  "editor.wordWrap": "on",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.suggestSelection": "first",
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.suggest.localityBonus": true,
+  "editor.suggest.insertMode": "replace",
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": "off"
+  },
+  "editor.lineNumbers": "relative",
+  "editor.bracketPairColorization.enabled": true,
+  "files.autoSave": "afterDelay",
+  "explorer.confirmDragAndDrop": false,
+  "workbench.startupEditor": "none",
+  "workbench.editor.revealIfOpen": true,
+  "workbench.settings.editor": "json",
+  "workbench.sideBar.location": "left",
+  "workbench.iconTheme": "catppuccin-mocha",
+  "workbench.layoutControl.enabled": false,
+  "window.title": "",
+  "window.menuBarVisibility": "compact",
+  "git.enableSmartCommit": true,
+  "editor.fontFamily": "Consolas, 'Courier New', monospace",
+  "workbench.editor.pinnedTabsOnSeparateRow": true,
+  "workbench.editor.wrapTabs": true,
+  "csharp.preview.improvedLaunchExperience": true,
+  "csharp.experimental.debug.hotReload": true,
+  "window.titleBarStyle": "custom",
+  "vim.useSystemClipboard": true,
+  "editor.linkedEditing": true,
+  "editor.semanticHighlighting.enabled": true,
+  "terminal.integrated.minimumContrastRatio": 1,
+  "vim.highlightedyank.enable": true,
+  "vim.hlsearch": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.tabSize": 2,
+  "editor.fontSize": 14,
+  "editor.renderLineHighlight": "none",
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 1,
+  "workbench.editor.limit.perEditorGroup": true,
+  "workbench.editor.showTabs": "single",
+  "breadcrumbs.enabled": false,
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "editor.scrollbar.verticalScrollbarSize": 2,
+  "editor.scrollbar.horizontalScrollbarSize": 2,
+  "workbench.activityBar.location": "hidden",
 }
