@@ -26,9 +26,14 @@
     "command": "workbench.action.navigateDown"
   },
   {
-    "key": "space ,",
-    "command": "workbench.action.showAllEditors",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "key": "space v",
+    "command": "workbench.action.splitEditor",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  {
+    "key": "space s",
+    "command": "workbench.action.splitEditorOrthogonal",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
   },
   {
     "key": "space p",
@@ -86,6 +91,11 @@
   {
     "key": "shift-k",
     "command": "editor.action.showHover",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  {
+    "key": "space c c",
+    "command": "editor.action.commentLine",
     "when": "vim.mode == 'Normal' && editorTextFocus"
   },
   {
@@ -201,5 +211,30 @@
     "key": "enter",
     "command": "list.toggleExpand",
     "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && explorerResourceIsFolder && !inputFocus"
-  }
+  },
+  // Terminal
+  {
+    "key": "ctrl+shift+a",
+    "command": "workbench.action.terminal.focusNext",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+b",
+    "command": "workbench.action.terminal.focusPrevious",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "workbench.action.togglePanel"
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "workbench.action.terminal.new",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus"
+  },
 ]

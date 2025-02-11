@@ -20,12 +20,12 @@
   "workbench.editor.revealIfOpen": true,
   "workbench.settings.editor": "json",
   "workbench.sideBar.location": "left",
-  "workbench.iconTheme": "catppuccin-mocha",
+  "workbench.iconTheme": "symbols",
   "workbench.layoutControl.enabled": false,
   "window.title": "",
   "window.menuBarVisibility": "compact",
   "git.enableSmartCommit": true,
-  "editor.fontFamily": "Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "JetBrains Mono",
   "workbench.editor.pinnedTabsOnSeparateRow": true,
   "workbench.editor.wrapTabs": true,
   "csharp.preview.improvedLaunchExperience": true,
@@ -36,18 +36,37 @@
   "editor.semanticHighlighting.enabled": true,
   "terminal.integrated.minimumContrastRatio": 1,
   "vim.highlightedyank.enable": true,
-  "vim.hlsearch": true,
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.tabSize": 2,
   "editor.fontSize": 14,
   "editor.renderLineHighlight": "none",
   "workbench.editor.limit.enabled": true,
-  "workbench.editor.limit.value": 1,
+  "workbench.editor.limit.value": 3,
   "workbench.editor.limit.perEditorGroup": true,
-  "workbench.editor.showTabs": "single",
+  "workbench.editor.showTabs": "multiple",
+  "editor.inlineSuggest.enabled": false,
   "breadcrumbs.enabled": false,
-  "workbench.colorTheme": "Catppuccin Mocha",
-  "editor.scrollbar.verticalScrollbarSize": 2,
-  "editor.scrollbar.horizontalScrollbarSize": 2,
-  "workbench.activityBar.location": "hidden",
+  "workbench.colorTheme": "Visual Studio 2019 Dark",
+  "jdk.jdkhome": "c:\\java\\Oracle_JDK-23",
+  "git.allowForcePush": true,
+  "vim.hlsearch": true,
+  "vim.visualModeKeyBindings": [
+    // Stay in visual mode while indenting
+    {
+      "before": [
+        "<"
+      ],
+      "commands": [
+        "editor.action.outdentLines"
+      ]
+    },
+    {
+      "before": [
+        ">"
+      ],
+      "commands": [
+        "editor.action.indentLines"
+      ]
+    },
+  ],
 }
