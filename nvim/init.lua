@@ -15,13 +15,4 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Setup Lazy and load plugins
-require("lazy").setup({
-    require("themes.catppuccin"),
-	require("plugins.bufferline"),
-	require("plugins.lualine"),
-	require("plugins.mini-icons"),
-	require("plugins.neotree"),
-	require("plugins.telescope"),
-	require("plugins.treesitter"),
-	require("plugins.which-key"),
-})
+require("lazy").setup("plugins")
