@@ -1,16 +1,4 @@
 return {
-  {
-    "williamboman/mason.nvim",
-    config = true
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
-    config = function()
-      require("mason-lspconfig").setup {}
-    end,
-  },
-
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -49,6 +37,16 @@ return {
 				on_attach = lsp_keymaps,
 			}
 			
+			require("lspconfig")["tinymist"].setup {
+                        capabilities = capabilities,
+                        settings = {
+                            formatterMode = "typstyle",
+                            exportPdf = "never"
+                        },
+                    }
+			-- omnisharp languageserver
+			local pid = vim.fn.getpid()
+
 			require'lspconfig'.omnisharp.setup{ 
 				capabilities = capabilities,
 				on_attach = lsp_keymaps,
@@ -56,8 +54,30 @@ return {
 				enable_import_completion = true,
 				organize_imports_on_format = true,
 				enable_decompilation_support = true,
-				filetypes = { 'cs', 'vb', 'csproj', 'sln', 'slnx', 'props', 'csx', 'targets', 'tproj', 'slngen', 'fproj' },
+				filetypes = { 'cs', 'vb', 'csproj', 'sln', 'slnx', 'props', 'csx', 'targets', 'tproj', 'slngen', 'fproj' }, 
+				cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(pid) },
 			}
         end,
-    }
+    },  {
+    "williamboman/mason.nvim",
+    config = function()
+		require("mason").setup({
+			PATH = "prepend", -- "skip" seems to cause the spawning error
+		})
+	end
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    config = function()
+      require("mason-lspconfig").setup {
+		ensure_installed = {
+                "lua_ls",
+                "ts_ls",
+                "tinymist",				
+                "omnisharp",
+            },
+	  }
+    end,
+  },
 }
