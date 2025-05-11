@@ -2,6 +2,7 @@
 
 PROJECT_DIR="$HOME/project"
 SESSION_NAME="main"
+ZSHRC="$HOME/.zshrc"
 
 # Change to the project directory
 cd "$PROJECT_DIR" || { echo "Directory not found: $PROJECT_DIR"; exit 1; }
