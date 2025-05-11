@@ -3,15 +3,14 @@
 PROJECT_DIR="$HOME/project"
 SESSION_NAME="main"
 ZSHRC="$HOME/.zshrc"
+export TERM="xterm-256color"  # Set TERM explicitly before starting tmux
 
-# Change to the project directory
 cd "$PROJECT_DIR" || { echo "Directory not found: $PROJECT_DIR"; exit 1; }
 
-# Create a new tmux session with the first window running nvim
-tmux new-session -d -s "$SESSION_NAME" -c "$PROJECT_DIR" 'nvim'
+# Start nvim in a zsh shell with .zshrc sourced to ensure color and env correctness
+tmux new-session -d -s "$SESSION_NAME" -c "$PROJECT_DIR" "zsh -i -c 'nvim'"
 
-# Create a second window in the same directory using the default shell
-tmux new-window -t "$SESSION_NAME:" -n 'shell' -c "$PROJECT_DIR"
+# Start a second zsh shell window, interactive
+tmux new-window -t "$SESSION_NAME:" -n 'shell' -c "$PROJECT_DIR" "zsh -i"
 
-# Attach to the tmux session
 tmux attach-session -t "$SESSION_NAME"
