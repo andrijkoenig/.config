@@ -13,4 +13,15 @@ tmux new-session -d -s "$SESSION_NAME" -c "$PROJECT_DIR" "zsh -i -c 'nvim'"
 # Start a second zsh shell window, interactive
 tmux new-window -t "$SESSION_NAME:" -n 'shell' -c "$PROJECT_DIR" "zsh -i"
 
-tmux attach-session -t "$SESSION_NAME"
+# Install SSL cert if provided
+if [ -f /tmp/cert.pem ]; then
+    echo "Found cert at /tmp/cert.pem, installing..."
+    CERT_DIR="/usr/local/share/ca-certificates"
+    sudo cp /tmp/cert.pem "$CERT_DIR/custom-cert.crt"
+    sudo update-ca-certificates
+fi
+
+# Your existing logic follows here...
+
+
+zsh
