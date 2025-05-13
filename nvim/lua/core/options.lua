@@ -5,11 +5,11 @@ vim.g.mapleader = " "
 vim.wo.number = true                     -- Show line numbers
 vim.o.relativenumber = true             -- Enable relative numbered lines
 vim.o.cursorline = false                -- Do not highlight the current line
-vim.o.termguicolors = true              -- Enable terminal GUI colors
 vim.opt.termguicolors = true            -- Redundant but safe for compatibility
 vim.opt.wrap = true
 vim.opt.scrolloff = 4                   -- Keep 4 lines visible when scrolling
 vim.opt.signcolumn = "yes"              -- Always show sign column
+vim.o.winborder = "rounded"
 
 -- Search
 vim.o.hlsearch = true

@@ -11,12 +11,12 @@ return {
     -- C-k: Toggle signature help (if signature.enabled = true)
     --
     -- See :h blink-cmp-config-keymap for defining your own keymap
-    keymap = { preset = 'default' },
+    keymap = { preset = 'enter' },
 
     appearance = {
 	  use_nvim_cmp_as_default = true,
       nerd_font_variant = 'mono'
-    },
-	signature = { enabled = true },
+    },	
+	signature = { enabled = true },	 
   },
 }
