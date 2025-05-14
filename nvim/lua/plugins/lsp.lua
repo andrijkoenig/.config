@@ -30,6 +30,7 @@ return {
                 "ts_ls",
                 "tinymist",
                 "omnisharp",
+                "angularls",
             },
             handlers = {
                 function(server_name)
@@ -63,6 +64,12 @@ return {
                 ["ts_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.ts_ls.setup {
+                        capabilities = capabilities,
+                    }
+                end,
+				["angularls"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.angularls.setup {
                         capabilities = capabilities,
                     }
                 end,
