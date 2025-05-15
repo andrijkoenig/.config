@@ -31,6 +31,7 @@ return {
                 "tinymist",
                 "omnisharp",
                 "angularls",
+                "jdtls",
             },
             handlers = {
                 function(server_name)
@@ -70,6 +71,12 @@ return {
 				["angularls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.angularls.setup {
+                        capabilities = capabilities,
+                    }
+                end,
+				["jdtls"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.jdtls.setup {
                         capabilities = capabilities,
                     }
                 end,
