@@ -20,4 +20,4 @@ fi
 
 clear
 
-tmux a
+zsh
