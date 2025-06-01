@@ -32,6 +32,10 @@ return {
                 "omnisharp",
                 "angularls",
                 "jdtls",
+				"html",
+				"cssls",
+				"emmet_ls",
+				"tailwindcss",
             },
             handlers = {
                 function(server_name)
@@ -97,6 +101,33 @@ return {
                         },
                     }
                 end,
+				["html"] = function()
+					require("lspconfig").html.setup {
+						capabilities = capabilities,
+					}
+				end,
+
+				["cssls"] = function()
+					require("lspconfig").cssls.setup {
+						capabilities = capabilities,
+					}
+				end,
+
+				["tailwindcss"] = function()
+					require("lspconfig").tailwindcss.setup {
+						capabilities = capabilities,
+					}
+				end,
+
+				["emmet_ls"] = function()
+					require("lspconfig").emmet_ls.setup {
+						capabilities = capabilities,
+						filetypes = {
+							"html", "css", "scss", "javascript", "javascriptreact",
+							"typescript", "typescriptreact", "svelte"
+						},
+					}
+				end,
 
             }
 

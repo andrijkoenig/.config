@@ -10,9 +10,6 @@ cd "$PROJECT_DIR" || { echo "Directory not found: $PROJECT_DIR"; exit 1; }
 # Start nvim in a zsh shell with .zshrc sourced to ensure color and env correctness
 tmux new-session -d -s "$SESSION_NAME" -c "$PROJECT_DIR" "zsh -i -c 'nvim'"
 
-# Start a second zsh shell window, interactive
-tmux new-window -t "$SESSION_NAME:" -n 'shell' -c "$PROJECT_DIR" "zsh -i"
-
 # Install SSL cert if provided
 if [ -f /tmp/cert.pem ]; then
     echo "Found cert at /tmp/cert.pem, installing..."
@@ -21,7 +18,6 @@ if [ -f /tmp/cert.pem ]; then
     sudo update-ca-certificates
 fi
 
-# Your existing logic follows here...
+clear
 
-
-zsh
+tmux a

@@ -1,0 +1,25 @@
+return {
+  "nvim-tree/nvim-tree.lua",
+  version = "*",
+  lazy = false,
+  dependencies = {
+    "nvim-tree/nvim-web-devicons", -- optional, for file icons
+  },
+  config = function()
+    require("nvim-tree").setup({
+      view = {
+        width = 30,
+        relativenumber = true,
+      },
+      renderer = {
+        group_empty = true,
+      },
+      filters = {
+        dotfiles = false,
+      },
+    })
+
+    -- keymap: toggle file tree
+    vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
+  end,
+}
