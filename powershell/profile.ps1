@@ -1,22 +1,46 @@
 function prompt {
-    $lastExit = if ($?) { "" } else { "$([char]0x274C) " }  # ❌
-    $admin = if (([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrator")) {
-        "$([char]0x1F512) "  # 🔒
-    } else { "" }
 
-    $path = "$([char]0x1F4C2) " + (Get-Location).Path  # 📂
-    
-    $git = ""
-    if (Test-Path .git -or (Get-Command git -ErrorAction SilentlyContinue)) {
-        try {
-            $branch = git rev-parse --abbrev-ref HEAD 2>$null
-            if ($branch) {
-                $git = "  $branch"  # nf-dev-git
-            }
-        } catch {}
+    # Assign Windows Title Text
+    $host.ui.RawUI.WindowTitle = "Current Folder: $pwd"
+
+    # Gather prompt details
+    $CmdPromptCurrentFolder = Split-Path -Path $pwd -Leaf
+    $CmdPromptUser = [Security.Principal.WindowsIdentity]::GetCurrent();
+    $Date = Get-Date -Format 'dddd hh:mm:ss tt'
+
+    # Check for Admin / Elevated Privileges
+    $IsAdmin = (New-Object Security.Principal.WindowsPrincipal (
+        [Security.Principal.WindowsIdentity]::GetCurrent())
+    ).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+
+    # Calculate execution time
+    $LastCommand = Get-History -Count 1
+    if ($LastCommand) {
+        $RunTime = ($LastCommand.EndExecutionTime - $LastCommand.StartExecutionTime).TotalSeconds
     }
 
-    "$lastExit$admin$path$git`n❯ "
+    if ($RunTime -ge 60) {
+        $ts = [timespan]::FromSeconds($RunTime)
+        $min, $sec = ($ts.ToString("mm\:ss")).Split(":")
+        $ElapsedTime = "$min min $sec sec"
+    } elseif ($RunTime) {
+        $ElapsedTime = "{0:N2} sec" -f $RunTime
+    } else {
+        $ElapsedTime = "0 sec"
+    }
+
+    # Prompt Display
+    Write-Host ""
+    if ($IsAdmin) {
+        Write-Host "  Elevated " -BackgroundColor DarkRed -ForegroundColor White -NoNewline
+    }
+
+    Write-Host "  $($CmdPromptUser.Name.Split('\')[1]) " -BackgroundColor DarkBlue -ForegroundColor White -NoNewline
+    Write-Host "  $CmdPromptCurrentFolder " -BackgroundColor DarkGray -ForegroundColor White -NoNewline
+    Write-Host "  $Date " -ForegroundColor White
+
+    Write-Host "  $ElapsedTime " -NoNewline -ForegroundColor Green
+    return "`n❯ "
 }
 
 # File and Directory Helpers
