@@ -3,32 +3,38 @@ return {
     'nvim-lualine/lualine.nvim',
     config = function()
         local colors = {
-            blue  = '#8ca0dc',
-            red   = '#e6788c',
-            green = '#a3cd81',
-            orange = '#d2a374',
-			
-            grey  = '#1E1E1E',
-            black = '#1a1a1a',
-            white = '#e2e2e2',
-        }
+		  blue = '#61afef',
+		  green = '#98c379',
+		  purple = '#c678dd',
+		  cyan = '#56b6c2',
+		  red1 = '#e06c75',
+		  red2 = '#be5046',
+		  yellow = '#e5c07b',
+		  fg = '#abb2bf',
+		  bg = '#282c34',
+		  gray1 = '#828997',
+		  gray2 = '#2c323c',
+		  gray3 = '#3e4452',
+		}
 
-        local my_theme = {
-            normal = {
-                a = { fg = colors.black, bg = colors.blue },
-                b = { fg = colors.white, bg = colors.grey },
-                c = { fg = colors.white, bg = colors.grey },
-            },
-            insert = { a = { fg = colors.black, bg = colors.orange } },
-            visual = { a = { fg = colors.black, bg = colors.green } },
-            replace = { a = { fg = colors.black, bg = colors.red } },
-            inactive = {
-                a = { fg = colors.white, bg = colors.black },
-                b = { fg = colors.white, bg = colors.black },
-                c = { fg = colors.white },
-            },
-        }
-
+		local onedark_theme = {
+		  normal = {
+			a = { fg = colors.bg, bg = colors.green, gui = 'bold' },
+			b = { fg = colors.fg, bg = colors.gray3 },
+			c = { fg = colors.fg, bg = colors.gray2 },
+		  },
+		  command = { a = { fg = colors.bg, bg = colors.yellow, gui = 'bold' } },
+		  insert = { a = { fg = colors.bg, bg = colors.blue, gui = 'bold' } },
+		  visual = { a = { fg = colors.bg, bg = colors.purple, gui = 'bold' } },
+		  terminal = { a = { fg = colors.bg, bg = colors.cyan, gui = 'bold' } },
+		  replace = { a = { fg = colors.bg, bg = colors.red1, gui = 'bold' } },
+		  inactive = {
+			a = { fg = colors.gray1, bg = colors.bg, gui = 'bold' },
+			b = { fg = colors.gray1, bg = colors.bg },
+			c = { fg = colors.gray1, bg = colors.gray2 },
+		  },
+		}
+		
         local lsp_server = {
             -- Lsp server name .
             function()
@@ -48,19 +54,32 @@ return {
             end,
             icon = ' LSP:',
         }
+		local mode = {
+		  'mode',
+		  fmt = function(str)
+			-- return ' ' .. str:sub(1, 1) -- displays only the first character of the mode
+			return ' ' .. str
+		  end,
+		}
+
+		local filename = {
+		  'filename',
+		  file_status = true, -- displays file status (readonly status, modified status)
+		  path = 0,           -- 0 = just filename, 1 = relative path, 2 = absolute path
+		}
 
         require('lualine').setup {
             options = {
-                theme = my_theme,
-                component_separators = '',
+				icons_enabled = true,
+				section_separators = { left = '', right = '' },
+				component_separators = { left = '', right = '' },				
+				always_divide_middle = true,
             },
             sections = {
-                lualine_a = { 'mode' },
-                lualine_b = { 'filename', 'branch' },
-                lualine_c = {
-                    '%=', lsp_server
-                },
-                lualine_x = {},
+                lualine_a = { mode },
+                lualine_b = { 'branch', filename },
+                lualine_c = {                },
+                lualine_x = { lsp_server },
                 lualine_y = { 'filetype', 'progress' },
                 lualine_z = { 'location' },
             },
