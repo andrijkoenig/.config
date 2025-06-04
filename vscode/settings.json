@@ -1,72 +1,78 @@
 {
+  // ========================
+  // 🖋️ Editor Configuration
+  // ========================
   "editor.wordWrap": "on",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
+  "editor.lineNumbers": "on",
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.fontSize": 16,
+  "editor.cursorSmoothCaretAnimation": "explicit",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.renderLineHighlight": "none",
+  "editor.linkedEditing": true,
+  "editor.semanticHighlighting.enabled": true,
+  "editor.inlineSuggest.enabled": false,
   "editor.suggestSelection": "first",
-  "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.suggest.localityBonus": true,
   "editor.suggest.insertMode": "replace",
+  "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.quickSuggestions": {
     "other": "on",
     "comments": "off",
     "strings": "off"
   },
-  "editor.lineNumbers": "relative",
-  "editor.bracketPairColorization.enabled": true,
+  // ========================
+  // 🧠 Vim Extension Settings
+  // ========================
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.incsearch": true,
+  "vim.highlightedyank.enable": true,
+  // ========================
+  // 🧪 Files, Terminals, and Autosave
+  // ========================
   "files.autoSave": "afterDelay",
-  "explorer.confirmDragAndDrop": false,
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.minimumContrastRatio": 1,
+  // ========================
+  // 🧰 Git and Version Control
+  // ========================
+  "git.enableSmartCommit": true,
+  "git.allowForcePush": true,
+  // ========================
+  // 🚀 Language-Specific (C#/Java)
+  // ========================
+  "csharp.preview.improvedLaunchExperience": true,
+  "csharp.experimental.debug.hotReload": true,
+  "jdk.jdkhome": "c:\\java\\Oracle_JDK-23",
+  // ========================
+  // 🖼️ UI and Layout
+  // ========================
   "workbench.startupEditor": "none",
-  "workbench.editor.revealIfOpen": true,
   "workbench.settings.editor": "json",
   "workbench.sideBar.location": "left",
   "workbench.iconTheme": "symbols",
   "workbench.layoutControl.enabled": false,
+  "workbench.editor.revealIfOpen": true,
+  "workbench.editor.pinnedTabsOnSeparateRow": true,
+  "workbench.editor.pinnedTabSizing": "normal",
+  "workbench.editor.showTabs": "multiple",
+  "workbench.editor.tabSizing": "fixed",
+  "workbench.editor.wrapTabs": true,
+  "workbench.statusBar.visible": false,
+  "workbench.activityBar.location": "hidden",
+  // ========================
+  // 💻 Window and Title Bar
+  // ========================
   "window.title": "",
   "window.menuBarVisibility": "compact",
-  "git.enableSmartCommit": true,
-  "editor.fontFamily": "JetBrains Mono",
-  "workbench.editor.pinnedTabsOnSeparateRow": true,
-  "workbench.editor.wrapTabs": true,
-  "csharp.preview.improvedLaunchExperience": true,
-  "csharp.experimental.debug.hotReload": true,
   "window.titleBarStyle": "custom",
-  "vim.useSystemClipboard": true,
-  "editor.linkedEditing": true,
-  "editor.semanticHighlighting.enabled": true,
-  "terminal.integrated.minimumContrastRatio": 1,
-  "vim.highlightedyank.enable": true,
-  "editor.cursorSmoothCaretAnimation": "on",
-  "editor.tabSize": 2,
-  "editor.fontSize": 14,
-  "editor.renderLineHighlight": "none",
-  "workbench.editor.limit.enabled": true,
-  "workbench.editor.limit.value": 3,
-  "workbench.editor.limit.perEditorGroup": true,
-  "workbench.editor.showTabs": "multiple",
-  "editor.inlineSuggest.enabled": false,
-  "breadcrumbs.enabled": false,
-  "workbench.colorTheme": "Visual Studio 2019 Dark",
-  "jdk.jdkhome": "c:\\java\\Oracle_JDK-23",
-  "git.allowForcePush": true,
-  "vim.hlsearch": true,
-  "vim.visualModeKeyBindings": [
-    // Stay in visual mode while indenting
-    {
-      "before": [
-        "<"
-      ],
-      "commands": [
-        "editor.action.outdentLines"
-      ]
-    },
-    {
-      "before": [
-        ">"
-      ],
-      "commands": [
-        "editor.action.indentLines"
-      ]
-    },
-  ],
+  // ========================
+  // 📍 Miscellaneous
+  // ========================
+  "breadcrumbs.enabled": false
 }
