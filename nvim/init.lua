@@ -60,7 +60,7 @@ vim.cmd [[set completeopt+=menuone,noselect,popup]]
 vim.lsp.config("roslyn", {
     cmd = {
         "dotnet",
-        vim.fn.expand("/opt/royslin/Microsoft.CodeAnalysis.LanguageServer.dll"),
+        "/opt/royslin/neutral/Microsoft.CodeAnalysis.LanguageServer.dll",
         "--stdio",
         "--logLevel=Information",
         "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.log.get_filename()),
