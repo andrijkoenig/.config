@@ -16,8 +16,7 @@ vim.opt.signcolumn = "yes"
 
 local map = vim.keymap.set
 vim.g.mapleader = " "
-map('n', '<leader>w', ':write<CR>')
-map('n', '<leader>q', ':quit<CR>')
+
 
 vim.pack.add({
 	{ src = "https://github.com/vague2k/vague.nvim" },
@@ -36,10 +35,18 @@ require "mini.pick".setup({
 })
 require "oil".setup()
 
+
+map('n', '<leader>w', ':write<CR>')
+map('n', '<leader>q', ':quit<CR>')
 map('n', '<leader>f', ":Pick files<CR>")
 map('n', '<leader>h', ":Pick help<CR>")
 map('n', '<leader>e', ":Oil<CR>")
 map('i', '<c-e>', function() vim.lsp.completion.get() end)
+map('n', '<leader>s', ':e #<CR>')
+map("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+-- Better indenting in visual mode
+map("v", "<", "<gv", { desc = "Indent left and reselect" })
+map("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('my.lsp', {}),
@@ -105,3 +112,37 @@ treesitter.setup({
         additional_vim_regex_highlighting = false,
     },
 })
+
+local pick = require("mini.pick")
+
+local function pick_buffers()
+  -- Get a list of all open buffers
+  local buffers = vim.api.nvim_list_bufs()
+  local items = {}
+
+  for _, bufnr in ipairs(buffers) do
+    if vim.api.nvim_buf_is_loaded(bufnr) then
+      local name = vim.api.nvim_buf_get_name(bufnr)
+      if name == "" then
+        name = "[No Name]"
+      end
+      table.insert(items, {
+        text = name,
+        info = { bufnr = bufnr }
+      })
+    end
+  end
+
+  pick.select({
+    items = items,
+    prompt = "Buffers:",
+    format_item = function(item)
+      return item.text
+    end,
+    on_select = function(item)
+      vim.api.nvim_set_current_buf(item.info.bufnr)
+    end,
+  })
+end
+
+vim.keymap.set("n", "<leader>b", pick_buffers, { noremap = true, silent = true })
