@@ -20,4 +20,4 @@ fi
 
 clear
 
-zsh
+nvim .

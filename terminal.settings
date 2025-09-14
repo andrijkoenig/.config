@@ -1,0 +1,52 @@
+BLOODMOON
+"schemes": 
+    [
+        {
+            "background": "#10100E",
+            "black": "#10100E",
+            "blue": "#0087BD",
+            "brightBlack": "#696969",
+            "brightBlue": "#007FFF",
+            "brightCyan": "#00CCCC",
+            "brightGreen": "#03C03C",
+            "brightPurple": "#FF1493",
+            "brightRed": "#FF2400",
+            "brightWhite": "#FFFAFA",
+            "brightYellow": "#FDFF00",
+            "cursorColor": "#C6C6C4",
+            "cyan": "#20B2AA",
+            "foreground": "#C6C6C4",
+            "green": "#009F6B",
+            "name": "Blood Moon",
+            "purple": "#9A4EAE",
+            "red": "#C40233",
+            "selectionBackground": "#C6C6C4",
+            "white": "#C6C6C4",
+            "yellow": "#FFD700"
+        }
+    ],
+
+KEYBINDING - TMUX Defaults
+
+"keybindings": [
+  // Prefix: Ctrl+b
+  { "command": { "action": "splitPane", "split": "vertical" }, "keys": "ctrl+b,%" },
+  { "command": { "action": "splitPane", "split": "horizontal" }, "keys": "ctrl+b,\"" },
+
+  { "command": { "action": "moveFocus", "direction": "left" }, "keys": "ctrl+b,h" },
+  { "command": { "action": "moveFocus", "direction": "down" }, "keys": "ctrl+b,j" },
+  { "command": { "action": "moveFocus", "direction": "up" }, "keys": "ctrl+b,k" },
+  { "command": { "action": "moveFocus", "direction": "right" }, "keys": "ctrl+b,l" },
+
+  { "command": "newTab", "keys": "ctrl+b,c" },
+  { "command": "nextTab", "keys": "ctrl+b,n" },
+  { "command": "prevTab", "keys": "ctrl+b,p" },
+
+  { "command": "closePane", "keys": "ctrl+b,x" },
+  { "command": "closeTab", "keys": "ctrl+b,&" },
+
+  { "command": "resizePaneLeft", "keys": "ctrl+b,alt+h" },
+  { "command": "resizePaneDown", "keys": "ctrl+b,alt+j" },
+  { "command": "resizePaneUp", "keys": "ctrl+b,alt+k" },
+  { "command": "resizePaneRight", "keys": "ctrl+b,alt+l" }
+]
