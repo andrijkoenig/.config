@@ -90,7 +90,7 @@ map('n', '<leader>f', ":Pick files<CR>")
 map('n', '<leader>h', ":Pick help<CR>")
 map("n", "<leader>b", ":Pick buffers<CR>")
 map('n', '<leader>e', ":Oil<CR>")
-map('i', '<C-e>', function() vim.lsp.buf.completion() end)
+map('i', '<C-e>', function() vim.lsp.completion.get() end)
 map('n', '<leader>s', ':e #<CR>')
 map("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear search highlights" })
 -- Better indenting in visual mode
