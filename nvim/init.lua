@@ -29,6 +29,12 @@ require "mini.bufremove".setup()
 require "mini.comment".setup()
 require "mini.icons".setup()
 require "mini.splitjoin".setup()
+require "mini.completion".setup({ 
+	window = {
+		info = { height = 25, width = 80, border = "rounded" },
+		signature = { height = 25, width = 80, border = "rounded" },
+	},
+})
 require "oil".setup()
 require("nvim-treesitter").setup({
     ensure_installed = { "c_sharp", "html", 'lua', 'python', 'rust', 'tsx', 'typescript' },
