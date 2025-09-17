@@ -40,7 +40,7 @@ require "blink.cmp".setup({
 	  use_nvim_cmp_as_default = true,
       nerd_font_variant = 'mono'
     },	
-	signature = { enabled = true },	 
+	signature = { enabled = true },	
   })
   
 local lsp_server = {
@@ -148,20 +148,25 @@ require("nvim-treesitter").setup({
 	},
 })
 -- lsp
-
-vim.api.nvim_create_autocmd('LspAttach', {
-	group = vim.api.nvim_create_augroup('my.lsp', {}),
-	callback = function(args)
-		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-		if client:supports_method('textDocument/completion') then
-			-- Optional: trigger autocompletion on EVERY keypress. May be slow!
-			local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
-			client.server_capabilities.completionProvider.triggerCharacters = chars
-			vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-		end
-	end,
+vim.lsp.config("ts_ls", {})
+vim.lsp.config("html", {})
+vim.lsp.config("emmet_ls", {})
+vim.lsp.config("cssls", {})
+vim.lsp.config("tailwindcss", {})
+vim.lsp.config("angularls", {
+    cmd = { "ngserver", "--stdio" }
 })
-
+vim.lsp.config("lua_ls", {
+    cmd = { "lua-language-server" },
+    settings = {
+        Lua = {
+            runtime = { version = "LuaJIT" },
+            diagnostics = { globals = { "vim" } },
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            telemetry = { enable = false },
+        }
+    }
+})
 vim.lsp.config("roslyn", {
     cmd = {
         "dotnet",
@@ -171,18 +176,6 @@ vim.lsp.config("roslyn", {
         "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.log.get_filename()),
     },
 })
-
-
-vim.lsp.enable(
-	{
-		"lua_ls",
-		"ts_ls",
-		"angularls",
-		"emmetls",
-		"tailwindcss",
-		"roslyn"
-	}
-)
 
 -- colors
 require "vague".setup({ transparent = true })
