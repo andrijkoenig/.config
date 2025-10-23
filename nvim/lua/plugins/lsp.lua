@@ -15,7 +15,7 @@ return {
             },
         },
         'saghen/blink.cmp',
-		'nvim-telescope/telescope.nvim' ,
+        'nvim-telescope/telescope.nvim',
     },
 
     config = function()
@@ -30,10 +30,10 @@ return {
                 "tinymist",
                 "angularls",
                 "jdtls",
-				"html",
-				"cssls",
-				"emmet_ls",
-				"tailwindcss",
+                "html",
+                "cssls",
+                "emmet_ls",
+                "tailwindcss",
             },
             handlers = {
                 function(server_name)
@@ -70,81 +70,88 @@ return {
                         capabilities = capabilities,
                     }
                 end,
-				["angularls"] = function()
+                ["angularls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.angularls.setup {
                         capabilities = capabilities,
                     }
                 end,
-				["jdtls"] = function()
+                ["jdtls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.jdtls.setup {
                         capabilities = capabilities,
                     }
                 end,
-               ["roslyn"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.roslyn = {
-						default_config = {
-							cmd = {
-								"dotnet",
-								"/opt/royslin/neutral/Microsoft.CodeAnalysis.LanguageServer.dll",
-								"--stdio",
-								"--logLevel=Information",
-								"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.log.get_filename()),
-							},
-							filetypes = { "cs", "vb" },
-							root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj", ".git"),
-						}
-					}
+                ["roslyn"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.roslyn = {
+                        default_config = {
+                            cmd = {
+                                "dotnet",
+                                "/opt/royslin/neutral/Microsoft.CodeAnalysis.LanguageServer.dll",
+                                "--stdio",
+                                "--logLevel=Information",
+                                "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.log.get_filename()),
+                            },
+                            filetypes = { "cs", "vb" },
+                            root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj", ".git"),
+                        }
+                    }
 
-					lspconfig.roslyn.setup {
-						capabilities = capabilities,
-					}
-				end,
-				["html"] = function()
-					require("lspconfig").html.setup {
-						capabilities = capabilities,
-					}
-				end,
+                    lspconfig.roslyn.setup {
+                        capabilities = capabilities,
+                    }
+                end,
+                ["html"] = function()
+                    require("lspconfig").html.setup {
+                        capabilities = capabilities,
+                    }
+                end,
 
-				["cssls"] = function()
-					require("lspconfig").cssls.setup {
-						capabilities = capabilities,
-					}
-				end,
+                ["cssls"] = function()
+                    require("lspconfig").cssls.setup {
+                        capabilities = capabilities,
+                    }
+                end,
 
-				["tailwindcss"] = function()
-					require("lspconfig").tailwindcss.setup {
-						capabilities = capabilities,
-					}
-				end,
+                ["tailwindcss"] = function()
+                    require("lspconfig").tailwindcss.setup {
+                        capabilities = capabilities,
+                    }
+                end,
 
-				["emmet_ls"] = function()
-					require("lspconfig").emmet_ls.setup {
-						capabilities = capabilities,
-						filetypes = {
-							"html", "css", "scss", "javascript", "javascriptreact",
-							"typescript", "typescriptreact", "svelte"
-						},
-					}
-				end,
+                ["emmet_ls"] = function()
+                    require("lspconfig").emmet_ls.setup {
+                        capabilities = capabilities,
+                        filetypes = {
+                            "html", "css", "scss", "javascript", "javascriptreact",
+                            "typescript", "typescriptreact", "svelte"
+                        },
+                    }
+                end,
 
             }
 
         })
 
-        vim.api.nvim_create_autocmd('LspAttach', {		
-            callback = function(e)						
-				local builtin = require('telescope.builtin')
-				
-				vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = "Go to Definition", buffer = e.buf })
-				vim.keymap.set("n", "gi", function() builtin.lsp_implementations() end, { desc = "Go to Implementation ", buffer = e.buf })
-				vim.keymap.set("n", "gr", function() builtin.lsp_references() end, { desc = "Show References", buffer = e.buf })
-                vim.keymap.set("n", "K",  function() vim.lsp.buf.hover() end, { buffer = e.buf, desc = "Hover Documentation" })
-                vim.keymap.set("n", "<leader>cf", function() vim.lsp.buf.format() end, { buffer = e.buf, desc = "Format Document" })
-                vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, { buffer = e.buf, desc = "Code Actions" })
-                vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.rename() end, { buffer = e.buf, desc = "Rename Symbol" })
+        vim.api.nvim_create_autocmd('LspAttach', {
+            callback = function(e)
+                local builtin = require('telescope.builtin')
+
+                vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end,
+                    { desc = "Go to Definition", buffer = e.buf })
+                vim.keymap.set("n", "gi", function() builtin.lsp_implementations() end,
+                    { desc = "Go to Implementation ", buffer = e.buf })
+                vim.keymap.set("n", "gr", function() builtin.lsp_references() end,
+                    { desc = "Show References", buffer = e.buf })
+                vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end,
+                    { buffer = e.buf, desc = "Hover Documentation" })
+                vim.keymap.set("n", "<leader>cf", function() vim.lsp.buf.format() end,
+                    { buffer = e.buf, desc = "Format Document" })
+                vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end,
+                    { buffer = e.buf, desc = "Code Actions" })
+                vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.rename() end,
+                    { buffer = e.buf, desc = "Rename Symbol" })
             end
         })
     end

@@ -8,7 +8,7 @@ vim.opt.cursorcolumn = false
 vim.opt.scrolloff = 4                   -- Keep 4 lines visible when scrolling
 vim.opt.signcolumn = "yes"              -- Always show sign column
 vim.o.winborder = "rounded"
-vim. opt. showmode = false
+vim.opt.showmode = false
 
 -- Search
 vim.o.hlsearch = true

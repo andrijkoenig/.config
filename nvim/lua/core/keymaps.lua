@@ -19,8 +19,8 @@ vim.keymap.set('n', '<Esc>', ':noh<CR>', opts)
 vim.keymap.set('n', 'x', '"_x', opts)
 
 -- Vertical scroll and center
-vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
-vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
+-- vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
+-- vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
 
 -- Navigate between splits
 vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', opts)
