@@ -3,38 +3,36 @@ return {
     'nvim-lualine/lualine.nvim',
     config = function()
         local colors = {
-            blue = '#61afef',
-            green = '#98c379',
-            purple = '#c678dd',
-            cyan = '#56b6c2',
-            red1 = '#e06c75',
-            red2 = '#be5046',
-            yellow = '#e5c07b',
-            fg = '#abb2bf',
-            bg = '#282c34',
-            gray1 = '#828997',
-            gray2 = '#2c323c',
-            gray3 = '#3e4452',
+            blue     = '#007acc',
+            green    = '#6A9955',
+            purple   = '#C586C0',
+            cyan     = '#4EC9B0',
+            red1     = '#F44747',
+            red2     = '#D16969',
+            yellow   = '#DCDCAA',
+            fg       = '#D4D4D4',
+            bg       = '#1E1E1E',
+            grayText = '#808080',
+            gray    = '#1f1f1f',
         }
 
-        local onedark_theme = {
-            normal = {
-                a = { fg = colors.bg, bg = colors.green, gui = 'bold' },
-                b = { fg = colors.fg, bg = colors.gray3 },
-                c = { fg = colors.fg, bg = colors.gray2 },
+        local vscode_theme = {
+            normal   = {
+                a = { fg = colors.bg, bg = colors.blue, gui = 'bold' },
+                b = { fg = colors.fg, bg = colors.gray },
+                c = { fg = colors.fg, bg = colors.gray },
             },
-            command = { a = { fg = colors.bg, bg = colors.yellow, gui = 'bold' } },
-            insert = { a = { fg = colors.bg, bg = colors.blue, gui = 'bold' } },
-            visual = { a = { fg = colors.bg, bg = colors.purple, gui = 'bold' } },
+            command  = { a = { fg = colors.bg, bg = colors.yellow, gui = 'bold' } },
+            insert   = { a = { fg = colors.bg, bg = colors.green, gui = 'bold' } },
+            visual   = { a = { fg = colors.bg, bg = colors.purple, gui = 'bold' } },
             terminal = { a = { fg = colors.bg, bg = colors.cyan, gui = 'bold' } },
-            replace = { a = { fg = colors.bg, bg = colors.red1, gui = 'bold' } },
+            replace  = { a = { fg = colors.bg, bg = colors.red1, gui = 'bold' } },
             inactive = {
-                a = { fg = colors.gray1, bg = colors.bg, gui = 'bold' },
-                b = { fg = colors.gray1, bg = colors.bg },
-                c = { fg = colors.gray1, bg = colors.gray2 },
+                a = { fg = colors.grayText, bg = colors.bg, gui = 'bold' },
+                b = { fg = colors.grayText, bg = colors.bg },
+                c = { fg = colors.grayText, bg = colors.gray },
             },
         }
-
         local lsp_server = {
             -- Lsp server name .
             function()
@@ -52,7 +50,7 @@ return {
                 end
                 return msg
             end,
-            icon = ' LSP:',
+            icon = ' ',
         }
         local mode = {
             'mode',
@@ -65,22 +63,27 @@ return {
         local filename = {
             'filename',
             file_status = true, -- displays file status (readonly status, modified status)
-            path = 0,   -- 0 = just filename, 1 = relative path, 2 = absolute path
+            path = 0,           -- 0 = just filename, 1 = relative path, 2 = absolute path
+            fmt = function (str)
+                local prefix = str:match("^[^%.]+")
+                return prefix
+            end
         }
 
         require('lualine').setup {
             options = {
                 icons_enabled = true,
+                theme = vscode_theme,
                 section_separators = { left = '', right = '' },
-                component_separators = { left = '', right = '' },
+                component_separators = { left = '', right = '' },
                 always_divide_middle = true,
             },
             sections = {
                 lualine_a = { mode },
-                lualine_b = { 'branch', filename },
+                lualine_b = { 'branch' },
                 lualine_c = {},
                 lualine_x = { lsp_server },
-                lualine_y = { 'filetype', 'progress' },
+                lualine_y = { 'filetype' },
                 lualine_z = { 'location' },
             },
             inactive_sections = {

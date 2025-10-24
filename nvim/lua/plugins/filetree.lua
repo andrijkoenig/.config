@@ -15,7 +15,7 @@ return {
                 group_empty = true,
             },
             filters = {
-                dotfiles = false, -- hide dotfiles
+                dotfiles = false,   -- hide dotfiles
                 git_ignored = true, -- hide gitignored files
             },
         })

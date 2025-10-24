@@ -1,12 +1,17 @@
-return {
-  "navarasu/onedark.nvim",
-  priority = 1000, -- make sure to load this before all the other start plugins
-  config = function()
-    require('onedark').setup {
-      style = 'darker'
+return
+{
+    {
+        "navarasu/onedark.nvim",
+        config = function()
+            require('onedark').setup {
+                style = 'warmer'
+            }
+        end
+    },
+    {
+        'Mofiqul/vscode.nvim',
+        config = function()
+            require('vscode').load()
+        end
     }
-    -- Enable theme
-    require('onedark').load()
-  end
 }
-
