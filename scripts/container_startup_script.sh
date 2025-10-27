@@ -7,9 +7,6 @@ export TERM="xterm-256color"  # Set TERM explicitly before starting tmux
 
 cd "$PROJECT_DIR" || { echo "Directory not found: $PROJECT_DIR"; exit 1; }
 
-# Start nvim in a zsh shell with .zshrc sourced to ensure color and env correctness
-tmux new-session -d -s "$SESSION_NAME" -c "$PROJECT_DIR" "zsh -i -c 'nvim'"
-
 # Install SSL cert if provided
 if [ -f /tmp/cert.pem ]; then
     echo "Found cert at /tmp/cert.pem, installing..."
@@ -20,4 +17,4 @@ fi
 
 clear
 
-nvim .
+exec zsh --rcs "$ZSHRC"
