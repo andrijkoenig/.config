@@ -4,6 +4,7 @@ return {
     dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-treesitter/nvim-treesitter',
+        'nvim-telescope/telescope-ui-select.nvim'
     },
     config = function()
         -- This is your opts table
@@ -16,8 +17,17 @@ return {
                     width = 9999,
                     height = 9999,
                 }
+            },
+            extensions = {
+                ["ui-select"] = {
+                    require("telescope.themes").get_dropdown {
+                        -- even more opts
+                    }
+                }
             }
+
         }
+        require("telescope").load_extension("ui-select")
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find files' })
