@@ -4,9 +4,8 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export TERM="xterm-256color"        # Fix tmux color issues
 
 autoload -U colors && colors
-PROMPT='%n@%m %{$fg[green]%}%~%{$reset_color%} $ '
+PS1='%n@%m %{$fg[green]%}%~%{$reset_color%} $ '
 
-source <(fzf --zsh)
 setopt autocd             
 setopt correct
 autoload -Uz compinit
