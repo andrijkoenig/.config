@@ -137,18 +137,17 @@ return {
         vim.api.nvim_create_autocmd('LspAttach', {
             callback = function(e)
                 local builtin = require('telescope.builtin')
-
                 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end,
                     { desc = "Go to Definition", buffer = e.buf })
                 vim.keymap.set("n", "gi", function() builtin.lsp_implementations() end,
                     { desc = "Go to Implementation ", buffer = e.buf })
-                vim.keymap.set("n", "gr", function() builtin.lsp_references() end,
+                vim.keymap.set("n", "gr", function() builtin.lsp_references(require('telescope.themes').get_dropdown({})) end,
                     { desc = "Show References", buffer = e.buf })
-                vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end,
+                vim.keymap.set("n", "K", function() vim.lsp.buf.hover({border="rounded"}) end,
                     { buffer = e.buf, desc = "Hover Documentation" })
                 vim.keymap.set("n", "<leader>cf", function() vim.lsp.buf.format() end,
                     { buffer = e.buf, desc = "Format Document" })
-                vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end,
+                vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action(require('telescope.themes').get_dropdown({})) end,
                     { buffer = e.buf, desc = "Code Actions" })
                 vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.rename() end,
                     { buffer = e.buf, desc = "Rename Symbol" })
