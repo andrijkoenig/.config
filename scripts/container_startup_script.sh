@@ -9,7 +9,6 @@ cd "$PROJECT_DIR" || { echo "Directory not found: $PROJECT_DIR"; exit 1; }
 
 # Install SSL cert if provided
 if [ -f /tmp/cert.pem ]; then
-    echo "Found cert at /tmp/cert.pem, installing..."
     CERT_DIR="/usr/local/share/ca-certificates"
     sudo cp /tmp/cert.pem "$CERT_DIR/custom-cert.crt"
     sudo update-ca-certificates
@@ -17,4 +16,4 @@ fi
 
 clear
 
-exec zsh --rcs "$ZSHRC"
+exec zsh
