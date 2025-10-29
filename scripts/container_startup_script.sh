@@ -16,4 +16,5 @@ fi
 
 clear
 
-exec zsh
+tmux
+

@@ -1,25 +1,24 @@
 export EDITOR="nvim"
 export VISUAL="nvim"
+
+export XDG_CONFIG_HOME=~/.config
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export TERM="xterm-256color"        # Fix tmux color issues
 
 autoload -U colors && colors
-PS1='%n@%m %{$fg[green]%}%~%{$reset_color%} $ '
 
-setopt autocd             
+setopt autocd 
+setopt always_to_end            
 setopt correct
 autoload -Uz compinit
 compinit
 
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' menu select
-zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
 
-export HISTIGNORE='exit:cd:ls:bg:fg:history:f:fd:vim'
-
-alias vim="nvim"
 alias vi="nvim"
-
 alias c="clear"
 alias l="ls -lah"
 alias la="ls -A"
@@ -31,3 +30,6 @@ mkcd() {
 }
 
 alias reload="source ~/.zshrc"
+
+PROMPT='%F{46}%~ ❯ %f'
+
