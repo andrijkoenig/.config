@@ -21,5 +21,11 @@ return
                 transparent = true
             })
         end
+    },
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
     }
 }

@@ -71,7 +71,7 @@ vim.lsp.config("roslyn_ls", {
         "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.log.get_filename()),
     },
 })
-vim.lsp.enable({ "lua_ls", "roslyn_ls", "angularls", "tailwindcss", "ts_ls" })
+vim.lsp.enable({ "lua_ls", "roslyn_ls", "angularls", "tailwindcss", "ts_ls", "clangd" })
 
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
@@ -96,5 +96,5 @@ map("n", "<leader>cf", function() vim.lsp.buf.format() end)
 map("n", "<leader>ca", function() vim.lsp.buf.code_action() end)
 map("n", "<leader>rr", function() vim.lsp.buf.rename() end)
 
-vim.cmd("colorscheme vague")
+vim.cmd("colorscheme vscode")
 
