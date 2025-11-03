@@ -96,5 +96,5 @@ map("n", "<leader>cf", function() vim.lsp.buf.format() end)
 map("n", "<leader>ca", function() vim.lsp.buf.code_action() end)
 map("n", "<leader>rr", function() vim.lsp.buf.rename() end)
 
-vim.cmd("colorscheme vscode")
+vim.cmd("colorscheme tokyonight-storm")
 
