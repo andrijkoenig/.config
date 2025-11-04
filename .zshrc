@@ -6,6 +6,10 @@ export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export TERM="xterm-256color"        # Fix tmux color issues
 
+export DOTNET_HOSTBUILDER__RELOADCONFIGONCHANGE=false
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+
 autoload -U colors && colors
 
 setopt autocd 
