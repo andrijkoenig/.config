@@ -53,7 +53,7 @@ function GetLspPath(lspPath)
 
     local isLinux = string.find(home, "\\") == nil
     if isLinux then
-        local unixLspDirectory = "/opt"
+        local unixLspDirectory = "/.local/lsp"
         return unixLspDirectory .. lspPath
     else
         local windowsLspDirectory = home .. "/languageservers"
@@ -61,7 +61,7 @@ function GetLspPath(lspPath)
     end
 end
 
-local roslynLspDllPath = GetLspPath("/roslyn/neutral/Microsoft.CodeAnalysis.LanguageServer.dll")
+local roslynLspDllPath = GetLspPath("/roslyn/Microsoft.CodeAnalysis.LanguageServer.dll")
 vim.lsp.config("roslyn_ls", {
     cmd = {
         "dotnet",
