@@ -29,14 +29,6 @@ return {
         }
         require("telescope").load_extension("ui-select")
 
-        local builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find files' })
-        vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = 'Telescope live grep' })
-        vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Telescope Buffers' })
-        vim.keymap.set('n', '<leader>ss', builtin.current_buffer_fuzzy_find, { desc = 'Telescope Fuzzy grep' })
-        vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = 'Telescope help tags' })
-        vim.keymap.set('n', '<leader>p', builtin.registers, { desc = 'Telescope registers' })
-        vim.keymap.set('n', '<leader>lt', builtin.treesitter, { desc = 'List functions' })
-        vim.keymap.set('n', '<leader>lq', '<cmd>Telescope diagnostics<CR>', { desc = 'List functions' })
+       
     end,
 }
