@@ -71,7 +71,10 @@ vim.lsp.config("roslyn_ls", {
         "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.log.get_filename()),
     },
 })
-vim.lsp.enable({ "lua_ls", "roslyn_ls", "angularls", "tailwindcss", "ts_ls", "clangd" })
+
+
+vim.lsp.enable({ "lua_ls", "angularls", "tailwindcss", "ts_ls", "clangd" })
+vim.lsp.enable('csharp_ls')
 
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
