@@ -17,6 +17,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.g.mapleader = ' '
+vim.opt.termguicolors = true
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
@@ -45,6 +46,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
+
 -- lsp
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 --
@@ -72,16 +74,28 @@ vim.lsp.config("roslyn_ls", {
     },
 })
 
+vim.lsp.config('csharp_ls', {
+    handlers = {
+        ["textDocument/definition"] = require('csharpls_extended').handler,
+        ["textDocument/typeDefinition"] = require('csharpls_extended').handler,
+    },
+    on_attach = function(client)
+        require("csharpls_extended").buf_read_cmd_bind()
+		require("telescope").load_extension("csharpls_definition")
+    end
+})
 
-vim.lsp.enable({ "lua_ls", "angularls", "tailwindcss", "ts_ls", "clangd" })
-vim.lsp.enable('csharp_ls')
+vim.lsp.enable({ "lua_ls", "angularls", "tailwindcss", "ts_ls", "clangd", 'csharp_ls', "jdtls" })
+
+
+-- keymaps
 
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 local builtin = require('telescope.builtin')
 
-map("n", "<leader>q", ":q<CR>")
-map("n", "<leader>w", ":w<CR>")
+map("n", "<leader>q", ":q<CR>", opts)
+map("n", "<leader>w", ":w<CR>", opts)
 map('n', '<Esc>', ':noh<CR>', opts)
 map('n', '<C-k>', ':wincmd k<CR>', opts)
 map('n', '<C-j>', ':wincmd j<CR>', opts)
@@ -103,13 +117,18 @@ map('n', '<leader>p', builtin.registers, { desc = 'Telescope registers' })
 map('n', '<leader>lt', builtin.treesitter, { desc = 'List functions' })
 map('n', '<leader>lq', '<cmd>Telescope diagnostics<CR>', { desc = 'List functions' })
 
-map("n", "gd", function() vim.lsp.buf.definition() end)
-map("n", "gi", function() builtin.lsp_implementations() end)
-map("n", "gr", function() builtin.lsp_references(require('telescope.themes').get_dropdown({})) end)
-map("n", "K", function() vim.lsp.buf.hover({ border = "rounded" }) end)
-map("n", "<leader>cf", function() vim.lsp.buf.format() end)
-map("n", "<leader>ca", function() vim.lsp.buf.code_action() end)
-map("n", "<leader>rr", function() vim.lsp.buf.rename() end)
+map("n", "K", function() vim.lsp.buf.hover({ border = "rounded" }) end, opts)
+
+map("n", "gd", builtin.lsp_definitions, opts)
+map("n", "gD", vim.lsp.buf.declaration, opts)
+map("n", "gi", builtin.lsp_implementations, opts)
+map("n", "gr", function() builtin.lsp_references(require('telescope.themes').get_dropdown({})) end, opts)
+map('n', 'gs', builtin.lsp_workspace_symbols, opts)
+
+map("n", "<leader>cf", function() vim.lsp.buf.format({async = true}) end, opts)
+map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
+map('n', '<F2>', vim.lsp.buf.rename, opts)
 
 vim.cmd("colorscheme tokyonight-storm")
 
