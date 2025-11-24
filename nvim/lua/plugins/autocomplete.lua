@@ -12,16 +12,16 @@ return {
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
         keymap = { preset = 'enter' },
-
         completion = {
-            menu = {
-                border = "rounded"
+            ghost_text = { enabled = true },
+            menu = { draw = { columns = { { "label", "label_description", gap = 1 }, { "kind" }, { "source_name" } } } } ,
+            documentation = {
+                auto_show = true,
+                auto_show_delay_ms = 500,
             }
         },
-        appearance = {
-            use_nvim_cmp_as_default = true,
-            nerd_font_variant = 'mono'
+        signature = {
+            enabled = true,
         },
-        signature = { enabled = true },
-    },
+    }
 }

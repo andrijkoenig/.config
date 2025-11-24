@@ -47,49 +47,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
 
--- lsp
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
---
-function GetLspPath(lspPath)
-    local home = vim.fn.expand('$HOME')
-
-    local isLinux = string.find(home, "\\") == nil
-    if isLinux then
-        local unixLspDirectory = "/.local/lsp"
-        return unixLspDirectory .. lspPath
-    else
-        local windowsLspDirectory = home .. "/languageservers"
-        return string.gsub(windowsLspDirectory .. lspPath, "/", "\\")
-    end
-end
-
-local roslynLspDllPath = GetLspPath("/roslyn/Microsoft.CodeAnalysis.LanguageServer.dll")
-vim.lsp.config("roslyn_ls", {
-    cmd = {
-        "dotnet",
-        roslynLspDllPath,
-        "--stdio",
-        "--logLevel=Information",
-        "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.log.get_filename()),
-    },
-})
-
-vim.lsp.config('csharp_ls', {
-    handlers = {
-        ["textDocument/definition"] = require('csharpls_extended').handler,
-        ["textDocument/typeDefinition"] = require('csharpls_extended').handler,
-    },
-    on_attach = function(client)
-        require("csharpls_extended").buf_read_cmd_bind()
-		require("telescope").load_extension("csharpls_definition")
-    end
-})
-
-vim.lsp.enable({ "lua_ls", "angularls", "tailwindcss", "ts_ls", "clangd", 'csharp_ls', "jdtls" })
-
-
 -- keymaps
-
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 local builtin = require('telescope.builtin')
@@ -129,6 +87,4 @@ map("n", "<leader>cf", function() vim.lsp.buf.format({async = true}) end, opts)
 map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
 map('n', '<F2>', vim.lsp.buf.rename, opts)
-
-vim.cmd("colorscheme tokyonight-storm")
 

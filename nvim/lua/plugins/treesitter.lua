@@ -18,23 +18,9 @@ return {
         end
     },
     {
-        'Wansmer/treesj',
-        keys = { '<space>m', '<space>j', '<space>s' },
-        dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you install parsers with `nvim-treesitter`
-        config = function()
-            require('treesj').setup({ --[[ your config ]] })
-        end,
-    },
-    {
         "norcalli/nvim-colorizer.lua",
         config = function()
             require 'colorizer'.setup()
         end
-    },
-    {
-        "j-hui/fidget.nvim",
-        opts = {
-            -- options
-        },
-    },
+    }
 }
