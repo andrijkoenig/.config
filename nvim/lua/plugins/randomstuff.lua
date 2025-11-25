@@ -30,5 +30,11 @@ return {
             }
         end,
         dependencies = { { "nvim-tree/nvim-web-devicons" } }
+    },
+    {
+        dir = "~/AppData/Local/nvim/lua/plugins/dotnet.nvim",
+        config = function ()
+            require("dotnet")
+        end
     }
 }

@@ -26,13 +26,54 @@ return {
             local roslynLspDllPath = GetLspPath("/roslyn")
 
             vim.env.PATH = vim.env.PATH .. ";" .. roslynLspDllPath
-            vim.lsp.enable({ "roslyn_ls", "lua_ls", "angularls", "tailwindcss", "ts_ls", "clangd" })
+            -- roslyn is handled via the plugin below
+            vim.lsp.enable({ "lua_ls", "angularls", "tailwindcss", "ts_ls", "clangd" })
         end,
     },
+    {"seblyng/roslyn.nvim"},
     {
         "d7omdev/nuget.nvim",
         config = function()
             require("nuget").setup()
         end,
     },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                -- See the configuration section for more details
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
+        },
+    },
+    { -- optional blink completion source for require statements and module annotations
+        "saghen/blink.cmp",
+        opts = {
+            sources = {
+                -- add lazydev to your completion providers
+                default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+                providers = {
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        -- make lazydev completions top priority (see `:h blink.cmp`)
+                        score_offset = 100,
+                    },
+                },
+            },
+            keymap = { preset = 'enter' },
+            completion = {
+                menu = { draw = { columns = { { "label", "label_description", gap = 1 }, { "kind" }, { "source_name" } } } },
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 500,
+                }
+            },
+            signature = {
+                enabled = true,
+            },
+        },
+    }
 }
