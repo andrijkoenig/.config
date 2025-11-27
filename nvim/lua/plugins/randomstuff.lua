@@ -34,7 +34,6 @@ return {
     {
         dir = "~/AppData/Local/nvim/lua/plugins/dotnet.nvim",
         config = function ()
-            require("dotnet")
         end
     }
 }
