@@ -11,9 +11,9 @@ local function update_lines(buf, items)
         local mark = item.isMarked and "[x]" or "[ ]"
         table.insert(lines, i .. "\t" .. mark .. "\t" .. item.visual)
     end
-    vim.api.nvim_set_option_value("modifiable", true, { buf = buf }) -- Temporarily make buffer modifiable to update lines
+    vim.api.nvim_set_option_value("modifiable", true, { buf = buf })
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-    vim.api.nvim_set_option_value("modifiable", false, { buf = buf }) -- Temporarily make buffer modifiable to update lines
+    vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
 end
 
 ---@param items ListItem[]
@@ -70,6 +70,54 @@ M.create_multiselect = function(items, title, on_done)
     vim.keymap.set('n', '<CR>', toggle_mark, { buffer = buf, noremap = true })
     vim.keymap.set('n', '<C-CR>', close_and_return, { buffer = buf, noremap = true })
     vim.keymap.set('n', 'q', function() vim.api.nvim_win_close(win, true) end, { buffer = buf, noremap = true })
+end
+
+---@param opts table
+---@param opts.on_done fun(test: string)
+function M.floating_input(opts)
+    opts = opts or {}
+    local on_done = opts.on_done or function(_) end
+    local width = opts.width or 50
+    local height = 1
+    local footer_text = "Enter: submit | Esc: cancel"
+
+    -- Create a scratch buffer
+    local buf = vim.api.nvim_create_buf(false, true)
+
+    -- Calculate centered window position
+    local ui = vim.api.nvim_list_uis()[1]
+    local row = math.floor((ui.height - height) / 2)
+    local col = math.floor((ui.width - width) / 2)
+
+    -- Open floating window
+    local win = vim.api.nvim_open_win(buf, true, {
+        relative = "editor",
+        width = width,
+        height = height,
+        row = row,
+        col = col,
+        style = "minimal",
+        border = "rounded",
+        title = opts.title,
+        footer = { { footer_text, "FloatBorder" } },
+        footer_pos = "right"
+    })
+
+    -- ENTER in insert mode: finish
+    vim.keymap.set("i", "<CR>", function()
+        local line = vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1]
+        vim.api.nvim_win_close(win, true)
+        vim.cmd("stopinsert")
+        on_done(line)
+    end, { buffer = buf })
+
+    -- Typing <Esc> in insert mode closes the window
+    vim.keymap.set("i", "<Esc>", function()
+        vim.api.nvim_win_close(win, true)
+    end, { buffer = buf })
+
+    -- Start in insert mode and stay there
+    vim.cmd("startinsert")
 end
 
 return M

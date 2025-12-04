@@ -9,10 +9,11 @@ vim.api.nvim_create_autocmd('BufEnter', {
     group = group,
     pattern = '*.cs',
     callback = function()
-        require("utils").insert_csharp_file_starter()
+        require("files").insert_csharp_file_starter_into_current_buffer ()
     end
 })
 
+---Fixes a bug with roslyn lsp where it wouldnt recognise newly created files
 vim.api.nvim_create_autocmd("BufWritePost", {
     group = group,
     pattern = "*.cs",
@@ -32,8 +33,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     end,
 })
 
-vim.api.nvim_create_user_command('DotnetClass', function() require('utils').insert_csharp_file_starter_into_current_buffer() end, {})
-vim.api.nvim_create_user_command('DotnetInterface', function() require('utils').insert_csharp_file_starter_into_current_buffer() end, {})
+vim.api.nvim_create_user_command('DotnetClass', function() require('files').insert_csharp_file_starter_into_current_buffer() end, {})
+vim.api.nvim_create_user_command('DotnetInterface', function() require('files').insert_csharp_file_starter_into_current_buffer() end, {})
 vim.api.nvim_create_user_command('DotnetTest', function() require('ui.picker').template_picker() end, {})
 
 vim.g.loaded_dotnet_nvim  = true
+

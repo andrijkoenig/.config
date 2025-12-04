@@ -1,18 +1,18 @@
 local M = {}
 
-local WarningMsg = function(text)
+M.WarningMsg = function(text)
     vim.api.nvim_echo({ { text, "WarningMsg" } }, false, {})
 end
 
-local to_unix_path = function(path)
+M.to_unix_path = function(path)
     return string.gsub(path, "\\", "/")
 end
 
-local is_charp_file = function(filename)
+M.is_charp_file = function(filename)
     return string.sub(filename, - #'.cs') == '.cs'
 end
 
-local is_current_buf_empty = function()
+M.is_current_buf_empty = function()
     return #vim.api.nvim_buf_get_lines(0, 1, -1, false) == 0
 end
 
@@ -27,6 +27,8 @@ M.get_project_dir = function(file_path)
         return path:match("(.+)/[^/]+$")
     end
 
+    --TODO for references i think i need to get all projects in sln file directory
+    --so maybe search until SLN and then recursivly all folders there for eaech csproj file
     local current_dir = parent_dir(file_path)
 
     local project_dir = nil;
@@ -44,7 +46,7 @@ M.get_project_dir = function(file_path)
         current_dir = parent_dir(current_dir)
     end
 
-    WarningMsg("Current directory is not a .NET project")
+    M.WarningMsg("Current directory is not a .NET project")
     return nil
 end
 
@@ -55,10 +57,15 @@ end
 ---@param file_path string an already cleaned up unix path
 ---@return dotnet.FileInformation|nil # table with the namespace and class_name information
 M.get_namespace = function(file_path)
-    local project_dir = M.get_project_dir(file_path).project_dir
+    file_path = M.to_unix_path(file_path)
+    local project_dir = M.get_project_dir(file_path)
+
+    if project_dir == nil then
+        return
+    end
 
     -- namespace
-    local start_index = string.find(project_dir, "/[^/]*$") + 1
+    local start_index = string.find(project_dir.project_dir, "/[^/]*$") + 1
     local end_index = string.find(file_path, "/[^/]*$") - 1
 
     local path_from_project_to_target = file_path:sub(start_index, end_index)
@@ -73,43 +80,57 @@ M.get_namespace = function(file_path)
     }
 end
 
-M.insert_csharp_file_starter_into_current_buffer = function(is_interface)
+M.get_dotnet_templates = function(opts)
+    opts = opts or {}
+    local cmd = "dotnet new list --columns-all"
+    local cmd_result = vim.fn.system(cmd)
 
-    if is_current_buf_empty() == false then
-        WarningMsg("Current buffer is not empty, stopped insertion for security")
-        return
+    local lines = {}
+    for line in cmd_result:gmatch("[^\r\n]+") do
+        table.insert(lines, line)
     end
 
-    local raw_file_path = vim.api.nvim_buf_get_name(0)
+    local result = {}
+    for index, value in ipairs(lines) do
+        if index > 4 then
+            value = value:gsub("  ", "~")
 
-    if is_charp_file(raw_file_path) == false then
-        WarningMsg("Not a C# (.cs) file")
-        return
+            local row = {}
+            for part in value:gmatch("[^~]+") do
+                local trimmed = part:match("^%s*(.-)%s*$")
+                table.insert(row, trimmed)
+            end
+
+            table.insert(result, row)
+        end
+    end
+    return result
+end
+
+M.get_dotnet_projects = function()
+    local cmd = "dotnet new list --columns-all"
+    local cmd_result = vim.fn.system(cmd)
+
+    local lines = {}
+    for line in cmd_result:gmatch("[^\r\n]+") do
+        table.insert(lines, line)
     end
 
+    local result = {}
+    for index, value in ipairs(lines) do
+        if index > 4 then
+            value = value:gsub("  ", "~")
 
-    local cleaned_file_path = to_unix_path(raw_file_path)
-    local file_information  = M.get_namespace(cleaned_file_path)
+            local row = {}
+            for part in value:gmatch("[^~]+") do
+                local trimmed = part:match("^%s*(.-)%s*$")
+                table.insert(row, trimmed)
+            end
 
-    if file_information == nil then
-        return
+            table.insert(result, row)
+        end
     end
-
-    local type_keyword = "class"
-    if is_interface then
-        type_keyword = "interface"
-    end
-
-    local csharp_starter_text = {
-        "namespace " .. file_information.namespace .. ";",
-        "",
-        "public " .. type_keyword .. " " .. file_information.type_name,
-        "{",
-        "",
-        "}"
-    }
-    vim.api.nvim_buf_set_lines(0, 0, 1, false, csharp_starter_text)
-    vim.api.nvim_command("write");
+    return result
 end
 
 
