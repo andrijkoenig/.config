@@ -30,6 +30,7 @@ nnoremap <leader>lq :action ProblemsView.ToolWindow<CR>
 nmap <leader>w :action SaveAll<CR>
 
 nmap <leader>ca :action ShowIntentionActions<CR>
+nmap <leader>cg :action Generate<CR>
 nmap <leader>cf :action ReformatCode<CR>
 nmap <leader>rr :action RenameElement<CR>
 
