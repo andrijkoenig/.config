@@ -1,0 +1,70 @@
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$pijul_channel\
+$docker_context\
+$nix_shell\
+$python\
+$conda\
+$meson\
+$spack\
+$fossil_branch\
+$git_branch\
+$git_commit\
+$git_state\
+$hg_branch\
+$nats\
+$custom\
+$sudo\
+$line_break\
+$jobs\
+$status\
+$container\
+$character"""
+
+[python]
+format = 'in [$symbol $virtualenv]($style) '
+symbol = '󰆧'
+
+[hostname]
+ssh_only = true
+format = '[$ssh_symbol](bold blue) on [$hostname](bold red) '
+trim_at = '.aalto.fi'
+disabled = false
+
+[conda]
+format = 'in [$symbol $environment]($style) '
+symbol = '󰆧'
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]](bold) )'
+conflicted = '[󱓌](red)'
+ahead = '[](yellow)'
+behind = '[](yellow)'
+diverged = '[󱡷](red)'
+up_to_date = '[✓](green)'
+untracked = '[?](yellow)'
+stashed = '[](purple)'
+modified = '[](blue)'
+staged = '[󰐕](green)'
+renamed = '[→](blue)'
+deleted = '[󰍴](red)'
+
+[battery]
+full_symbol = '󱊣 '
+discharging_symbol = '󱊡 '
+charging_symbol = '󰂄 '
+
+# Replace the '❯' symbol in the prompt
+[character]
+success_symbol = '[󰌵 ](bold green)'
+error_symbol = '[󰌶 ](bold red)'
+vimcmd_symbol = '[󱈈 ](bold green)'
+vimcmd_replace_one_symbol = '[󱈈 ](bold purple)'
+vimcmd_replace_symbol = '[󱈈 ](bold purple)'
+vimcmd_visual_symbol = '[󱈈 ](bold yellow)'
