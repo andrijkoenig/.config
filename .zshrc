@@ -44,7 +44,7 @@ bindkey '^n' history-search-forward
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(dotenv command-not-found gitfast gh ssh ssh-agent docker docker-compose kubectl pip npm nvm)
+plugins=(dotenv command-not-found gitfast gh git docker docker-compose kubectl pip npm nvm)
 
 source $ZSH/oh-my-zsh.sh
 
