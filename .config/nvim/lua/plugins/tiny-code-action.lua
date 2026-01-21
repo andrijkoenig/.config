@@ -13,7 +13,7 @@ function M.init()
 			function()
 				require("tiny-code-action").code_action()
 			end,
-			desc = "Code action",
+			desc = "Code action (preview)",
 		},
 	})
 end

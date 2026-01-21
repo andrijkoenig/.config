@@ -40,8 +40,8 @@ function M.init()
 		{ "gO", "<cmd>Trouble lsp_outgoing_calls<cr>", desc = "Outgoing calls" },
 
 		-- Quickfix and location list
-		{ "<leader>l", "<cmd>Trouble loclist<cr>", desc = "Toggle location" },
-		{ "<leader>q", "<cmd>Trouble qflist<cr>", desc = "Toggle quickfix" },
+		{ "<leader>xl", "<cmd>Trouble loclist toggle<cr>", desc = "Location list" },
+		{ "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix list" },
 		{
 			"[q",
 			function()
@@ -107,9 +107,9 @@ function M.init()
 			desc = "Last location list item",
 		},
 
-		{ "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Diagnostics (buffer)" },
+		{ "<leader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Diagnostics (buffer)" },
 		{
-			"<leader>cD",
+			"<leader>xX",
 			function()
 				-- Analyse all files for diagnostics
 				-- NOTE: The drawback of this manual approach is that it will only scan the
@@ -126,7 +126,8 @@ function M.init()
 			end,
 			desc = "Diagnostics (workspace)",
 		},
-		{ "<leader>cu", "<cmd>Trouble lsp<cr>", desc = "Usage" },
+		{ "<leader>xs", "<cmd>Trouble symbols toggle pinned=true<cr>", desc = "Symbols" },
+		{ "<leader>xu", "<cmd>Trouble lsp toggle<cr>", desc = "LSP usage" },
 	})
 
 	-- Hijack quickfix and location list

@@ -3,6 +3,46 @@ local M = {
 	lazy = false,
 }
 
+-----------------------------------------------------------------------
+-- WHICH-KEY OVERVIEW
+--
+-- This file is the single source of truth for global, non-plugin-local
+-- keymaps that should appear in which-key.
+--
+-- General rules:
+-- - Leader is <Space> (see `lua/mappings.lua`).
+-- - Single-letter leaders are reserved as *namespaces* (groups).
+-- - Longer sequences (e.g. <leader>cf) perform specific actions.
+--
+-- Leader namespaces (groups):
+--   <leader>a : Assistant / AI helpers
+--   <leader>b : Buffers (open, close, navigate)
+--   <leader>c : Code (LSP actions: format, code actions, rename, etc.)
+--   <leader>d : Diagnostics (high-level diagnostic helpers)
+--   <leader>e : Explorer (file tree / file management)
+--   <leader>g : Git (hunks, history, graph, diff)
+--   <leader>l : LSP (low-level LSP tools if added in the future)
+--   <leader>q : Quickfix (manipulating quickfix lists)
+--   <leader>s : Search (all Telescope pickers)
+--   <leader>t : Tabs (tab management)
+--   <leader>u : UI toggles (inlay hints, visual helpers, etc.)
+--   <leader>x : Trouble (diagnostics, lists, symbols, LSP usage)
+--   <leader>y : Yank / registers (yank ring, paste history)
+--   <leader>k : Toolkit / misc utilities (normal + visual variants)
+--
+-- Non-leader keys that show in which-key:
+--   - Window management: <A-Arrow>, <C-h/j/k/l>, "_", "|"
+--   - Indent helpers (visual mode): <, >
+--   - Tabs: Q, ]t, [t
+--   - Movement / diagnostics: K, gk, ge, gE, [e, ]e, F
+--
+-- When adding new mappings:
+--   1. Choose the most appropriate group above (or add a new one).
+--   2. Use a descriptive `desc` so which-key can show meaningful labels.
+--   3. Prefer command-form mappings (e.g. "<cmd>Telescope …<cr>") to
+--      avoid `require`-ing plugins before they are loaded by lazy.nvim.
+-----------------------------------------------------------------------
+
 -- local function toggle_locationlist()
 -- 	local win = vim.api.nvim_get_current_win()
 -- 	local qf_winid = vim.fn.getloclist(win, { winid = 0 }).winid
@@ -15,81 +55,85 @@ local M = {
 -- 	local action = qf_winid > 0 and "cclose" or "copen"
 -- 	vim.cmd("botright " .. action)
 -- end
-local builtin = require('telescope.builtin')
 
 local basic_mappings = {
-	-- GROUPS
-{ "<leader>a", group = "Assistant" },
-{ "<leader>b", group = "Buffers" },
-{ "<leader>c", group = "Code" },
+	-------------------------------------------------------------------
+	-- GROUP DEFINITIONS (just namespaces, no direct actions)
+	-------------------------------------------------------------------
+	{ "<leader>a", group = "Assistant" }, -- AI / assistant actions
+	{ "<leader>b", group = "Buffers" }, -- buffer management
+	{ "<leader>c", group = "Code" }, -- LSP / code manipulation
+	{ "<leader>d", group = "Diagnostics" }, -- high-level diagnostics
+	{ "<leader>e", group = "Explorer" }, -- file explorer / tree
+	{ "<leader>g", group = "Git" }, -- Git-related actions
+	{ "<leader>l", group = "LSP" }, -- raw LSP tools (if needed)
+	{ "<leader>q", group = "Quickfix" }, -- quickfix helpers
+	{ "<leader>s", group = "Search" }, -- Telescope / search
+	{ "<leader>t", group = "Tabs" }, -- tab management
+	{ "<leader>u", group = "UI" }, -- UI toggles (inlay hints, etc.)
+	{ "<leader>x", group = "Trouble" }, -- Trouble.nvim diagnostics UI
+	{ "<leader>y", group = "Yank" }, -- yank history / registers
+	{ "<leader>k", group = "Toolkit" }, -- misc tools (normal mode)
+	{ "<leader>k", group = "Toolkit", mode = "v" }, -- misc tools (visual)
 
-{ "<leader>d", group = "Diagnostics" },
-
-{ "<leader>e", group = "Editor" },
-
-{ "<leader>g", group = "Git" },
-
-{ "<leader>l", group = "LSP" },
-
-{ "<leader>q", group = "Quickfix" },
-
-{ "<leader>s", group = "Search" },
-
-{ "<leader>t", group = "Tabs" },
-
-{ "<leader>k", group = "Toolkit" },
-{ "<leader>k", group = "Toolkit", mode = "v" },
-
-	---- MAPPINGS
-
-	-- Resize with arrows
+	-------------------------------------------------------------------
+	-- WINDOW MANAGEMENT
+	-------------------------------------------------------------------
+	-- Resize current window using Alt + Arrow keys
 	{ "<A-Up>", "<cmd>resize -1<cr>", desc = "Resize up" },
 	{ "<A-Down>", "<cmd>resize +1<cr>", desc = "Resize down" },
 	{ "<A-Left>", "<cmd>vertical resize -1<cr>", desc = "Resize left" },
 	{ "<A-Right>", "<cmd>vertical resize +1<cr>", desc = "Resize right" },
-	
-	-- Navigate window splits
+
+	-- Navigate between splits with Ctrl + h/j/k/l (tmux-style)
 	{ "<C-k>", "<cmd>wincmd k<cr>", desc = "Window up" },
 	{ "<C-j>", "<cmd>wincmd j<cr>", desc = "Window down" },
 	{ "<C-h>", "<cmd>wincmd h<cr>", desc = "Window left" },
 	{ "<C-l>", "<cmd>wincmd l<cr>", desc = "Window right" },
 
-	-- Window splits
+	-- Create new splits with single keys (normal mode)
 	{ "_", "<cmd>split<cr>", desc = "Horizontal split" },
 	{ "|", "<cmd>vsplit<cr>", desc = "Vertical split" },
 
-	-- Better indenting
+	-------------------------------------------------------------------
+	-- INDENTATION HELPERS (VISUAL MODE)
+	-------------------------------------------------------------------
+	-- Stay in visual mode when indenting left/right
 	{ "<", "<gv", mode = "v", desc = "Indent left" },
 	{ ">", ">gv", mode = "v", desc = "Indent right" },
 
-	-- Tabs
-	{ "Q", "<cmd>tabclose<cr>", desc = "Quit tab" },
-	{ "]t", "<cmd>tabnext<cr>", desc = "Next tab" },
-	{ "[t", "<cmd>tabprev<cr>", desc = "Prev tab" },
-	{ "<leader>tn", "<cmd>tabnew<cr>", desc = "New" },
-	{ "<leader>tc", "<cmd>tabclose<cr>", desc = "Close current" },
+	-------------------------------------------------------------------
+	-- TABS
+	-------------------------------------------------------------------
+	{ "Q", "<cmd>tabclose<cr>", desc = "Quit tab" }, -- close current tab
+	{ "]t", "<cmd>tabnext<cr>", desc = "Next tab" }, -- next tab
+	{ "[t", "<cmd>tabprev<cr>", desc = "Prev tab" }, -- previous tab
+	{ "<leader>tn", "<cmd>tabnew<cr>", desc = "New" }, -- new empty tab
+	{ "<leader>tc", "<cmd>tabclose<cr>", desc = "Close current" }, -- close current tab
 
-	-- Move selected line / block of text in visual mode
+	-------------------------------------------------------------------
+	-- TEXT MANIPULATION
+	-------------------------------------------------------------------
+	-- Move selected block up/down in visual mode
 	{ "J", "<cmd>move '>+1<cr>gv-gv", mode = "x", desc = "Move block down" },
 	{ "K", "<cmd>move '<-2<cr>gv-gv", mode = "x", desc = "Move block up" },
-	
-	-- Avoid c storing in registers
-	{ "c", '"_c', desc = "Change" },
-	{ "C", '"_C', desc = "Change to end of line" },
 
-	-- Sensible clipboard paste in insert mode
+	-- Avoid polluting registers when using `c` / `C`
+	{ "c", '"_c', desc = "Change (no register)" },
+	{ "C", '"_C', desc = "Change to end of line (no register)" },
+
+	-- Sensible clipboard paste in insert mode (Ctrl-v)
 	{ "<C-v>", "<C-r>*", mode = "i", desc = "Clipboard paste" },
 
-	-- Y behaves like D and C
+	-- Make `Y` behave like `D`/`C` (yank to end of line)
 	{ "Y", "y$", desc = "Yank to end of line" },
 
-	-- LSP
-	{ "K", "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Hover" },
-	-- Now handled by Trouble
-	-- { "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>" },
-	-- { "gd", "<cmd>lua vim.lsp.buf.definition()<cr>" },
-	-- { "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>" },
-	-- { "gr", "<cmd>lua vim.lsp.buf.references()<cr>" },
+	-------------------------------------------------------------------
+	-- LSP CORE MAPPINGS (NON-LEADER)
+	-------------------------------------------------------------------
+	{ "K", "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Hover" }, -- show documentation
+	-- Jump / reference mappings are primarily provided via Trouble:
+	--   ga, gd, gD, gi, gr, gt, gI, gO (see `plugins/trouble.lua`)
 	{ "gk", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "Signature help" },
 	{ "ge", "<cmd>lua vim.diagnostic.open_float()<cr>", desc = "Float diagnostics" },
 	{
@@ -99,24 +143,31 @@ local basic_mappings = {
 	},
 	{ "[e", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Prev. diagnostic" },
 	{ "]e", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Next diagnostic" },
-	
-	{ "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
-{ "<leader>la", vim.lsp.buf.code_action, desc = "Code action" },
-{ "<leader>lr", vim.lsp.buf.rename, desc = "Rename" },
 
-	-- telescope
-	
-{ "<leader>sf", builtin.find_files, desc = "Find files" },
-{ "<leader>sg", builtin.live_grep, desc = "Live grep" },
-{ "<leader>sb", builtin.buffers, desc = "Buffers" },
-{ "<leader>ss", builtin.current_buffer_fuzzy_find, desc = "Buffer fuzzy find" },
-{ "<leader>si", builtin.grep_string, desc = "Grep word under cursor" },
-{ "<leader>sh", builtin.help_tags, desc = "Help tags" },
-{ "<leader>sr", builtin.registers, desc = "Registers" },
+	-- Leader-based code actions (Code group: <leader>c…)
+	{ "<leader>cf", function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
+	{ "<leader>ca", vim.lsp.buf.code_action, desc = "Code action" },
+	{ "<leader>cr", vim.lsp.buf.rename, desc = "Rename symbol" },
 
-	-- Inline hints
+	-------------------------------------------------------------------
+	-- SEARCH / TELESCOPE (Search group: <leader>s…)
+	-------------------------------------------------------------------
+	-- NOTE: Use Telescope commands to avoid `require("telescope.builtin")`
+	-- before Telescope is loaded by lazy.nvim.
+	{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+	{ "<leader>sg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+	{ "<leader>sb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+	{ "<leader>ss", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer fuzzy find" },
+	{ "<leader>si", "<cmd>Telescope grep_string<cr>", desc = "Grep word under cursor" },
+	{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
+	{ "<leader>sr", "<cmd>Telescope registers<cr>", desc = "Registers" },
+
+	-------------------------------------------------------------------
+	-- UI TOGGLES (UI group: <leader>u…)
+	-------------------------------------------------------------------
+	-- Toggle inline LSP inlay hints globally
 	{
-		"<leader>kh",
+		"<leader>uh",
 		function()
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), {
 				bufnr = nil, -- all buffers
@@ -125,26 +176,33 @@ local basic_mappings = {
 		desc = "Toggle inline hints",
 	},
 
-	-- Quickfix & location lists
+	-------------------------------------------------------------------
+	-- QUICKFIX & LOCATION LIST HELPERS (capital Q/L namespace)
+	-------------------------------------------------------------------
+	-- These are advanced commands to manipulate quickfix / loclist.
+	-- They deliberately do NOT use <leader>q / <leader>l so that those
+	-- prefixes can remain available as group names.
 	{ "<leader>Q", group = "Quickfix list" },
 	{ "<leader>L", group = "Location list" },
-	{ "<leader>Qd", ":cdo ", desc = "Do" },
-	{ "<leader>Ld", ":ldo ", desc = "Do" },
-	{ "<leader>QD", ":cfdo ", desc = "Do (file)" },
-	{ "<leader>LD", ":lfdo ", desc = "Do (file)" },
-	{ "<leader>Qe", ":cgete ", desc = "Create from expression" },
-	{ "<leader>Le", ":lgete ", desc = "Create from expression" },
-	{ "<leader>Qf", ":cfilter /", desc = "Filter" },
-	{ "<leader>Lf", ":lfilter /", desc = "Filter" },
-	{ "<leader>Ql", ":cf ", desc = "Load file" },
-	{ "<leader>Ll", ":lf ", desc = "Load file" },
-	{ "<leader>Qn", "<cmd>cnew<cr>", desc = "Next" },
-	{ "<leader>Ln", "<cmd>lnew<cr>", desc = "Next" },
-	{ "<leader>Qp", "<cmd>col<cr>", desc = "Previous" },
-	{ "<leader>Lp", "<cmd>lol<cr>", desc = "Previous" },
+	{ "<leader>Qd", ":cdo ", desc = "Do" }, -- :cdo {cmd}
+	{ "<leader>Ld", ":ldo ", desc = "Do" }, -- :ldo {cmd}
+	{ "<leader>QD", ":cfdo ", desc = "Do (file)" }, -- :cfdo {cmd}
+	{ "<leader>LD", ":lfdo ", desc = "Do (file)" }, -- :lfdo {cmd}
+	{ "<leader>Qe", ":cgete ", desc = "Create from expression" }, -- :cgete {expr}
+	{ "<leader>Le", ":lgete ", desc = "Create from expression" }, -- :lgete {expr}
+	{ "<leader>Qf", ":cfilter /", desc = "Filter" }, -- :cfilter /pattern
+	{ "<leader>Lf", ":lfilter /", desc = "Filter" }, -- :lfilter /pattern
+	{ "<leader>Ql", ":cf ", desc = "Load file" }, -- :cf {file}
+	{ "<leader>Ll", ":lf ", desc = "Load file" }, -- :lf {file}
+	{ "<leader>Qn", "<cmd>cnew<cr>", desc = "Next list" }, -- open new quickfix list
+	{ "<leader>Ln", "<cmd>lnew<cr>", desc = "Next list" }, -- open new location list
+	{ "<leader>Qp", "<cmd>col<cr>", desc = "Previous list" }, -- previous quickfix list
+	{ "<leader>Lp", "<cmd>lol<cr>", desc = "Previous list" }, -- previous location list
 
-	-- Folding toggle
-	{ "F", "za", desc = "Toggle fold" },
+	-------------------------------------------------------------------
+	-- FOLDING
+	-------------------------------------------------------------------
+	{ "F", "za", desc = "Toggle fold" }, -- toggle fold under cursor
 }
 
 function M.config()
