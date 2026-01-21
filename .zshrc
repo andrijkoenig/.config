@@ -78,10 +78,6 @@ zinit light Aloxaf/fzf-tab
 # zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
-zinit snippet OMZP::aws
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 
 # Load completions
@@ -91,8 +87,6 @@ zinit cdreplay -q
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
-eval "$(fzf --zsh)"
-
 
 # Change tmux window name on directory change
 export TMUX_PLUGIN_MANAGER_PATH="$HOME/.config/tmux/plugins/"
