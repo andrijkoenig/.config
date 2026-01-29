@@ -36,7 +36,5 @@ fi
 # Load completions
 autoload -Uz compinit && compinit
 
-zinit cdreplay -q
-
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
