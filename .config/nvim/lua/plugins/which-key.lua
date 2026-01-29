@@ -150,19 +150,6 @@ local basic_mappings = {
 	{ "<leader>cr", vim.lsp.buf.rename, desc = "Rename symbol" },
 
 	-------------------------------------------------------------------
-	-- SEARCH / TELESCOPE (Search group: <leader>s…)
-	-------------------------------------------------------------------
-	-- NOTE: Use Telescope commands to avoid `require("telescope.builtin")`
-	-- before Telescope is loaded by lazy.nvim.
-	{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-	{ "<leader>sg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-	{ "<leader>sb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-	{ "<leader>ss", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer fuzzy find" },
-	{ "<leader>si", "<cmd>Telescope grep_string<cr>", desc = "Grep word under cursor" },
-	{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-	{ "<leader>sr", "<cmd>Telescope registers<cr>", desc = "Registers" },
-
-	-------------------------------------------------------------------
 	-- UI TOGGLES (UI group: <leader>u…)
 	-------------------------------------------------------------------
 	-- Toggle inline LSP inlay hints globally
@@ -221,7 +208,7 @@ function M.config()
 			title_pos = "center", -- does not matter unless boder != "none"
 			padding = { 2, 6 }, -- extra window padding [top/bottom, right/left]
 		},
-		show_help = false, -- show help message on the command line when the popup is visible
+		show_help = true, -- show help message on the command line when the popup is visible
 		show_keys = true, -- show the currently pressed key and its label as a message in the command line
 	})
 

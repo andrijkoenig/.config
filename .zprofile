@@ -1,10 +1,8 @@
-export TERMINAL=kitty
 export EDITOR=nvim
 export VISUAL=nvim
-export PAGER=most
 export MANPAGER="nvim -c 'Man!' -o -"
-export BAT_THEME="TwoDark"
 export TERM="tmux-256color"
+
 export XDG_CONFIG_HOME=$HOME/.config
 
 
@@ -31,7 +29,6 @@ alias tm='mprocs' # manager
 
 # git
 alias g='git'
-alias gui='lazygit' # ui
 alias ga='git add'
 alias gaa='git add --all'
 alias gb='git branch'
@@ -62,7 +59,3 @@ alias td='tmux detach'
 alias tls='tmux ls'
 alias ts='tmux kill-server'
 alias tk='tmux kill-session -t'
-
-
-
-source $HOME/.secrets

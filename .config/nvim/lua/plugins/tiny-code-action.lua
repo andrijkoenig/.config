@@ -21,7 +21,7 @@ end
 function M.config()
 	require("tiny-code-action").setup({
 		backend = "difftastic",
-		picker = "telescope.nvim",
+		picker = "snacks",
 	})
 end
 

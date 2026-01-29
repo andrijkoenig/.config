@@ -10,5 +10,7 @@ if [ -f /tmp/cert.pem ]; then
     update-ca-certificates
 fi
 
-# Always start or attach to tmux session "dev"
-exec tmux new-session -A -s dev
+chmod +x create_tmux_session.sh init_all_projects.sh select_tmux_session.sh
+
+./init_all_projects.sh
+./select_tmux_session.sh
