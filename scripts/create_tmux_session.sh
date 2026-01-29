@@ -9,11 +9,6 @@ if [ -z "$PROJECT_DIR" ]; then
     exit 1
 fi
 
-if [ ! -d "$PROJECT_DIR/.git" ]; then
-    echo "Directory $PROJECT_DIR is not a git repository."
-    exit 1
-fi
-
 SESSION_NAME=$(basename "$PROJECT_DIR")
 
 # Skip if session already exists
