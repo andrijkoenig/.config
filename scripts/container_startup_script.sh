@@ -2,6 +2,7 @@
 set -euo pipefail
 
 export TERM="xterm-256color"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Optional custom cert injection
 if [ -f /tmp/cert.pem ]; then
@@ -10,5 +11,6 @@ if [ -f /tmp/cert.pem ]; then
     update-ca-certificates
 fi
 
-./init_all_projects.sh
-./select_tmux_session.sh
+
+"$SCRIPT_DIR/init_all_projects.sh"
+"$SCRIPT_DIR/select_tmux_session.sh.sh"
