@@ -13,4 +13,5 @@ fi
 
 
 "$SCRIPT_DIR/init_all_projects.sh"
-"$SCRIPT_DIR/select_tmux_session.sh"
+
+exec "$SCRIPT_DIR/select_tmux_session.sh"
