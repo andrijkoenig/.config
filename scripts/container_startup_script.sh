@@ -10,7 +10,5 @@ if [ -f /tmp/cert.pem ]; then
     update-ca-certificates
 fi
 
-chmod +x create_tmux_session.sh init_all_projects.sh select_tmux_session.sh
-
 ./init_all_projects.sh
 ./select_tmux_session.sh
