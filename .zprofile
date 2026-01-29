@@ -53,9 +53,6 @@ alias v='nvim'
 
 # tmux
 alias t='tmux'
-alias tn='tmux new -s'
-alias ta='tmux attach -t'
 alias td='tmux detach'
-alias tls='tmux ls'
-alias ts='tmux kill-server'
-alias tk='tmux kill-session -t'
+
+alias ts='select_tmux_session.sh'
