@@ -17,6 +17,10 @@ if [ -z "$SELECTED" ]; then
     exit 0
 fi
 
+# create .curproj file
+echo "$SELECTED" > /projects/.curproj
+
+
 # If already inside tmux, switch client; otherwise attach
 if [ -n "$TMUX" ]; then
     tmux switch-client -t "$SELECTED"
