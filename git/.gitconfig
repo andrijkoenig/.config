@@ -1,6 +1,6 @@
 [user]
 	name = Andrij König
-	email = 47005148+andrijkoenig@users.noreply.github.com
+	email = 47005148+andikon@users.noreply.github.com
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
