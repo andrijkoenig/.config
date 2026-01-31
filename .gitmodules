@@ -1,0 +1,3 @@
+[submodule "DotfileSync.java"]
+	path = DotfileSync.java
+	url = https://github.com/andikon/dotfiles-sync.git

@@ -1,13 +1,10 @@
 [user]
 	name = Andrij König
 	email = 47005148+andrijkoenig@users.noreply.github.com
-[init]
-	defaultBranch = master
 [core]
 	editor = nvim
-	excludesfile = ~/.config/git/.gitignore_global
+	excludesfile = ~/.gitignore_global
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-    pager = most
 [push]
     autoSetupRemote = true
 [diff]
@@ -47,10 +44,5 @@
     R = reset
     S = stash
     s = status
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
 [pull]
 	rebase = true
